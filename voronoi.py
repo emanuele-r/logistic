@@ -24,19 +24,44 @@ import matplotlib.pyplot as plt
 def generate_data(gen_x):
     return gen_x
 
+
+
 def graph_voronoi(generate_data, text ):
-    vor=Voronoi(generate_data)
-    _=voronoi_plot_2d(vor)
-    plt.title(f"Voronoi Regions, num of points :{len(generate_data)}")
-    plt.annotate(f'{text}', xy=(-73, 41.6), xytext=(-73, 41.6))
-    plt.show()
+    try :
+        vor=Voronoi(generate_data)
+        _=voronoi_plot_2d(vor)
+        plt.title(f"Voronoi Regions, num of points :{len(generate_data)}")
+        for i , (x, y ) in enumerate(generate_data):
+                # plt.annotate(f'{generate_data[i]}', xy=(x, y), xytext=(x, y))
+                plt.annotate(f'$ {text[i]}', xy=(x,y), xytext=(x,y))
+        plt.show()
+    except Exception as e :
+        print(f'An Error Occured')
+
     return _ 
 
+
+
 def graph_delaunay(generate_data, text):
-    tri=Delaunay(generate_data)
-    __=delaunay_plot_2d(tri)
-    plt.annotate(f'{text}', xy=(-73, 41.6), xytext=(-73, 41.6))
-    plt.title("Delaunay")
-    plt.show()
+    try:
+        tri=Delaunay(generate_data)
+        __=delaunay_plot_2d(tri)
+        for i , (x, y ) in enumerate(generate_data):
+                # plt.annotate(f'{generate_data[i]}', xy=(x, y), xytext=(x, y))
+                plt.annotate(f'$ {text[i]}', xy=(x,y), xytext=(x,y))
+        plt.title("Delaunay")
+        plt.show()
+    except Exception as e :
+        print(f'An Error Occured')
+    
     return __
+
+
+def graph_simple(generate_data, text):
+    for i, (x,y) in enumerate(generate_data):
+        plt.scatter(x, y)
+        plt.title(f'Simple Scatter Graph')
+        plt.annotate(f' $ {text[i]}', xy=(x,y), xytext=(x,y))
+        plt.legend(f'{text[i]}')
+    plt.show()
 
